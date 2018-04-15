@@ -1,8 +1,4 @@
---
--- File generated with SQLiteStudio v3.1.1 on dom abr 15 11:11:42 2018
---
--- Text encoding used: System
---
+
 PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 
@@ -46,9 +42,7 @@ CREATE TABLE Funcionario (
     idade        INTEGER CHECK (idade >= 18) 
                          NOT NULL,
     tempoServico INTEGER NOT NULL
-                         CHECK (tempoServico >= 0),
-    depID        INTEGER REFERENCES Departamento (id) 
-                         NOT NULL
+                         CHECK (tempoServico >= 0) 
 );
 
 
