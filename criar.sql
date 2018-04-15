@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.1.1 on dom abr 15 09:46:37 2018
+-- File generated with SQLiteStudio v3.1.1 on dom abr 15 11:11:42 2018
 --
 -- Text encoding used: System
 --
@@ -67,7 +67,8 @@ DROP TABLE IF EXISTS Genero;
 
 CREATE TABLE Genero (
     id               INTEGER PRIMARY KEY,
-    nome             TEXT    NOT NULL,
+    nome             TEXT    NOT NULL
+                             UNIQUE,
     idadeRecomendada INTEGER NOT NULL
 );
 
@@ -103,7 +104,8 @@ DROP TABLE IF EXISTS Jogo;
 
 CREATE TABLE Jogo (
     id           INTEGER PRIMARY KEY,
-    nome         TEXT    NOT NULL,
+    nome         TEXT    NOT NULL
+                         UNIQUE,
     playerbaseID INTEGER REFERENCES Playerbase (id) 
                          NOT NULL
 );
