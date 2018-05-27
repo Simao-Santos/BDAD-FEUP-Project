@@ -1,5 +1,5 @@
 
-PRAGMA foreign_keys = off;
+PRAGMA foreign_keys = on;
 BEGIN TRANSACTION;
 
 -- Table: Departamento
@@ -9,9 +9,16 @@ CREATE TABLE Departamento (
     id            INTEGER PRIMARY KEY,
     nome          TEXT    NOT NULL,
     tamanhoEquipa INTEGER NOT NULL
-                          CHECK (tamanhoEquipa > 0) 
 );
 
+-- Table: Divisao
+DROP TABLE IF EXISTS Divisao;
+
+CREATE TABLE Divisao (
+    id       INTEGER PRIMARY KEY,
+    nome     TEXT    NOT NULL,
+    moradaID INTEGER REFERENCES Morada (id) 
+);
 
 -- Table: DepartamentoDivisao
 DROP TABLE IF EXISTS DepartamentoDivisao;
@@ -23,14 +30,7 @@ CREATE TABLE DepartamentoDivisao (
 );
 
 
--- Table: Divisao
-DROP TABLE IF EXISTS Divisao;
 
-CREATE TABLE Divisao (
-    id       INTEGER PRIMARY KEY,
-    nome     TEXT    NOT NULL,
-    moradaID INTEGER REFERENCES Morada (id) 
-);
 
 
 -- Table: Funcionario
@@ -39,10 +39,10 @@ DROP TABLE IF EXISTS Funcionario;
 CREATE TABLE Funcionario (
     id           INTEGER PRIMARY KEY,
     nome         TEXT    NOT NULL,
-    idade        INTEGER CHECK (idade >= 18) 
-                         NOT NULL,
+    idade        INTEGER NOT NULL,
     tempoServico INTEGER NOT NULL
-                         CHECK (tempoServico >= 0) 
+                         CHECK (tempoServico >= 0),
+    moradaID     INTEGER REFERENCES Morada (id) 
 );
 
 
@@ -101,7 +101,9 @@ CREATE TABLE Jogo (
     nome         TEXT    NOT NULL
                          UNIQUE,
     playerbaseID INTEGER REFERENCES Playerbase (id) 
-                         NOT NULL
+                         NOT NULL,
+    generoID INTEGER REFERENCES Genero(id)
+                        NOT NULL
 );
 
 
@@ -115,14 +117,6 @@ CREATE TABLE JogoDivisao (
 );
 
 
--- Table: JogoGenero
-DROP TABLE IF EXISTS JogoGenero;
-
-CREATE TABLE JogoGenero (
-    jogoID   INTEGER PRIMARY KEY
-                     REFERENCES Jogo (id),
-    generoID INTEGER REFERENCES Genero (id) 
-);
 
 
 -- Table: JogoJogador
@@ -179,7 +173,7 @@ DROP TABLE IF EXISTS Playerbase;
 CREATE TABLE Playerbase (
     id          INTEGER PRIMARY KEY,
     numeroTotal INTEGER NOT NULL
-                        CHECK (numeroTotal > 0),
+                        CHECK (numeroTotal >= 0),
     idadeMedia  INTEGER NOT NULL
 );
 
