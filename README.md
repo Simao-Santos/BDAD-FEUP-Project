@@ -7,3 +7,7 @@ This repository contains the project completed in **Base de Dados**, a **2nd yea
 - Antero Santos
 - Miguel Barraca
 - Simão Santos
+
+## License
+
+This project is not licensed under any license.
